@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>index</title>
+
+    <!-- vue & axios CDN -->
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+    <!-- 新增user表單 引用createForm.js -->
+    <div id="Form">        
+        <form>
+            <table border="1">
+                <tr>
+                   <td>姓名: <input type="text" v-model="name"></td>
+                   <td>電話: <input type="text" v-model="phone"></td>
+                   <td>備註: <textarea type="text" v-model="remark" rows="1"></textarea></textarea></td>
+                   <td>
+                        <button type="submit" @click="sendForm">建立</button> 
+                        <button type="reset" @click="clearForm">清除</button>
+                    </td>
+               </tr>
+           </table>
+        </form> <br/>      
+    </div>
+
+
+    <!-- 顯示資料庫所有users 引用users_list.js -->
+    <div id="users">
+        <table border="1">
+            <tr>
+                <td></td>
+                <td>名稱</td>
+                <td>電話</td>
+                <td>備註</td>
+                <td></td>
+            </tr>
+            <tr v-for="user in users">
+                <td> <input type="checkbox" :id="user.id-1"> </td>
+                <td> {{user.name}} </td>
+                <td> {{user.phone}} </td>
+                <td> {{user.remark}} </td>
+                <td> <button :id="user.id">編輯</button> </td>
+                <td> <button type="submit" :id="user.id" @click="deleteUser(user.id-1)">刪除</button> </td>
+            </tr>
+        </table> <br>
+        
+    </div>    
+
+    <script src="js/createForm.js"></script>
+    <script src="js/users_list.js"></script>
+        
+</body>
+</html>

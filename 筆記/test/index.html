@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>index</title>
+
+    <!-- vue & axios CDN -->
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+    <!-- 新增user表單 -->
+    <div id="app">        
+        <form>
+            <table border="1">
+                <tr>
+                   <td>姓名: <input type="text" v-model="users.name"></td>
+                   <td>電話: <input type="text" v-model="users.phone"></td>
+                   <td>備註: <textarea type="text" v-model="users.remark" rows="1"></textarea></textarea></td>
+                   <td><button type="submit" @click="sendForm">建立</button> <button type="reset" @click="clearForm">清除</button></td>
+               </tr>
+           </table>
+        </form> <br/>
+        {{ users }}        
+    </div>
+
+    <script src="createForm.js"></script>
+        
+</body>
+</html>
