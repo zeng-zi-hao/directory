@@ -2,20 +2,19 @@
 Vue.createApp({
     data(){
         return{            
-            name: '',
-            phone: '',
-            remark: ''            
+            // name: '',
+            // phone: '',
+            // remark: ''            
         };        
     },
     methods: {
         sendForm(){       
-            axios            
+            axios           
                 .post('create.php',{
                     name: this.name,
                     phone: this.phone,
                     remark: this.remark,
-                })
-                
+                })                
                 .then(response => {
                     console.log(response);
                 })

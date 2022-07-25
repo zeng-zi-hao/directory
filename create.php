@@ -11,6 +11,8 @@
 
     $conn -> execute(" INSERT INTO users VALUES('', '$name', '$phone', '$remark')");
 
-    echo $name,$phone,$remark;
+    // echo $name,$phone,$remark;
+
+    include('trans_data.php');
 
     $conn->close();

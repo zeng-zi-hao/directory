@@ -1,5 +1,5 @@
 <?php
-    include('ado_conn.php');
+    require_once('ado_conn.php');
 
     $request = json_decode(file_get_contents("php://input"));
 
@@ -10,5 +10,4 @@
 
     include('trans_data.php');
 
-    echo $id;
-
+    $conn->close();
