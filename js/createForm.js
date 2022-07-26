@@ -2,10 +2,8 @@
 Vue.createApp({
     data(){
         return{            
-            // name: '',
-            // phone: '',
-            // remark: ''            
-        }       
+   
+        };        
     },
     methods: {
         sendForm(){       
@@ -15,13 +13,13 @@ Vue.createApp({
                     phone: this.phone,
                     remark: this.remark,
                 })                
-                .then(response => {
-                    console.log(response);
-                })
-                .catch(error => {
-                    console.log(error);
-                }) 
-                this.clearForm();              
+                    .then(response => {
+                        console.log(response);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    }) 
+                    this.clearForm();              
         },
         clearForm(){
             this.name = '';

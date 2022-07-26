@@ -39,20 +39,23 @@
     <div id="users">
         <table border="1">
             <tr>
-                <td></td>
+                <td> <input type="checkbox" v-model="selectAll" @click="selectAll"></td>
                 <td>名稱</td>
                 <td>電話</td>
                 <td>備註</td>
                 <td></td>
             </tr>
             <tr v-for="user in users">
-                <td> <input type="checkbox" :id="user.id"> </td>
+                <td> <input type="checkbox" :value="user.id" v-model="selectid"> </td>
                 <td> {{user.name}} </td>
                 <td> {{user.phone}} </td>
                 <td> {{user.remark}} </td>
+                <td> {{user}} </td>
                 <td> <button :id="user.id">編輯</button> </td>
-                <td> <button type="submit" :id="user.id" @click="deleteUser(user.id-1)">刪除</button> </td>
+                <td> <button type="submit" :id="user.id" @click="deleteUser(user.id)">刪除</button> </td>
             </tr>
+            {{ selectid }} <br>
+            <button type="submit" @click="multidelete"> 刪除 </button>
         </table> <br>
         
     </div>    

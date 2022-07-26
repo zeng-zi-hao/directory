@@ -5,7 +5,7 @@
 
     $id = $request -> id;
     
-    $conn -> execute(" DELETE FROM users WHERE id = '$id' ");
+    $conn -> execute(" DELETE FROM users WHERE id IN ('$id') ");
     $conn -> execute(" ALTER TABLE users AUTO_INCREMENT = 1 ");
 
     include('trans_data.php');

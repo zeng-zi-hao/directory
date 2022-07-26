@@ -1,38 +1,56 @@
 Vue.createApp({
     data(){
         return{
+            selectid: [],
             users:[]
         }
     },
     methods:{
         getAllUserList(){
             axios
-                // .get('trans_data.php')
                 .get('json/data.json')  
-                .then(response => {                    
-                    this.users = response.data.result;
-                    console.log(this.users);                  
-                })
-                .catch(error => {
-                    console.log(error);
-                })
+                    .then(response => {                    
+                        this.users = response.data.result;
+                        // console.log(response); 
+                        console.log(this.users);                  
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+                
         },
         deleteUser(id){
-            console.log(this.users[id]);
             axios                
-                .post('deleteUser.php',{
-                    id: this.users[id].id                
-                })
-                    .then(response => {                         
-                        this.getAllUserList()
-                        console.log('刪除 id',this.users[id].id, 'name: ',this.users[id].name);                            
+                .post('deleteUser.php',{id})
+                    .then(response => {                      
+                        this.getAllUserList()                                                    
                     })
                     .catch(error => {
                         console.log('錯誤:',error); 
-                })      
+                    })      
+        },
+        selectAll(){
+                    
+        },
+        multidelete(){
+            for(i=0;i<this.selectid.length;i++){
+                axios 
+                .post('deleteUser.php',{
+                    id: this.selectid[i]
+                })
+                    .then(response => {                      
+                        this.getAllUserList();
+                        this.selectid = [];
+                        // this.selectid.length = 0;
+                        console.log(this.selectid)                                                
+                    })
+                    .catch(error => {
+                        console.log('錯誤:',error); 
+                    })
+            }                     
         },
     },
     mounted(){
          this.getAllUserList();
-    }
+    },
 }).mount('#users')
