@@ -5,7 +5,7 @@ Vue.createApp({
             // name: '',
             // phone: '',
             // remark: ''            
-        };        
+        }       
     },
     methods: {
         sendForm(){       

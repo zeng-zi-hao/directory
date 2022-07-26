@@ -18,18 +18,18 @@ Vue.createApp({
                 })
         },
         deleteUser(id){
-            console.log(this.users[id].name);
+            console.log(this.users[id]);
             axios                
                 .post('deleteUser.php',{
                     id: this.users[id].id                
                 })
-                .then(response => {
-                    // this.users = response.data[id].id;
-                    console.log(response);
-                })
-                .catch(error => {
-                    console.log(error);
-                })                         
+                    .then(response => {                         
+                        this.getAllUserList()
+                        console.log('刪除 id',this.users[id].id, 'name: ',this.users[id].name);                            
+                    })
+                    .catch(error => {
+                        console.log('錯誤:',error); 
+                })      
         },
     },
     mounted(){
