@@ -1,6 +1,7 @@
 Vue.createApp({
     data(){
         return{
+            text:'121233',
             users: [
                 {
                     name: 'a',

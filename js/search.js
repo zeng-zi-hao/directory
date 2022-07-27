@@ -1,8 +1,3 @@
-重製id流水號   alter table users AUTO_INCREMENT=1;
-
-axios ajax管理
-
-//vue 起手式
 Vue.createApp({
     data(){
         return{
@@ -15,4 +10,4 @@ Vue.createApp({
     mounted(){  
                 
     }
-}).mount(' #{{要掛載的區域}} ');
+}).mount('#search');

@@ -1,9 +1,11 @@
 Vue.createApp({
     data(){
         return{
-            selectid: [],
-            users:[]
-        }
+            foo:[], //暫存
+            allselected:false, //預設全選按鈕狀態        
+            selectid: [],   //擺放被選中框框的id
+            users:[] //資料庫中所有的user
+        };
     },
     methods:{
         getAllUserList(){
@@ -19,6 +21,16 @@ Vue.createApp({
                     })
                 
         },
+        editUser(id){
+            axios                
+                .post('edidUser.php',{id})
+                    .then(response => {                      
+                        this.getAllUserList()                                                    
+                    })
+                    .catch(error => {
+                        console.log('錯誤:',error); 
+                    })
+        },
         deleteUser(id){
             axios                
                 .post('deleteUser.php',{id})
@@ -30,7 +42,17 @@ Vue.createApp({
                     })      
         },
         selectAll(){
-                    
+            if(!this.allselected){
+                this.foo = [];
+                this.selectid = []; 
+                for(i=0;i<this.users.length;i++){
+                    this.foo.push(this.users[i].id);     
+                    this.selectid = this.foo.flat();                   
+                };                 
+            }else{
+                this.foo = [];
+                this.selectid = [];                
+            }                          
         },
         multidelete(){
             for(i=0;i<this.selectid.length;i++){
@@ -40,6 +62,8 @@ Vue.createApp({
                 })
                     .then(response => {                      
                         this.getAllUserList();
+                        this.allselected = false;
+                        this.foo = [];
                         this.selectid = [];
                         // this.selectid.length = 0;
                         console.log(this.selectid)                                                
@@ -50,7 +74,7 @@ Vue.createApp({
             }                     
         },
     },
-    mounted(){
-         this.getAllUserList();
+    mounted(){        
+        this.getAllUserList();
     },
 }).mount('#users')

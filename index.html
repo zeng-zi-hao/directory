@@ -14,7 +14,7 @@
 <body>
 
     <!-- 新增user表單 引用createForm.js -->
-    <div id="Form">        
+    <div id="Form">      
         <form>
             <table border="1">
                 <tr>
@@ -30,7 +30,7 @@
         </form> <br/>      
     </div>
 
-    <div id="serach">
+    <div id="search">
         搜尋欄: <input><br><br>
     </div>
 
@@ -39,29 +39,29 @@
     <div id="users">
         <table border="1">
             <tr>
-                <td> <input type="checkbox" v-model="selectAll" @click="selectAll"></td>
+                <td> <input type="checkbox" v-model="allselected" @click="selectAll"></td>
                 <td>名稱</td>
                 <td>電話</td>
                 <td>備註</td>
-                <td></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
             </tr>
             <tr v-for="user in users">
                 <td> <input type="checkbox" :value="user.id" v-model="selectid"> </td>
                 <td> {{user.name}} </td>
                 <td> {{user.phone}} </td>
                 <td> {{user.remark}} </td>
-                <td> {{user}} </td>
-                <td> <button :id="user.id">編輯</button> </td>
+                <td> <button type="submit" :id="user.id" @click="editUser(user.id)">編輯</button> </td>
                 <td> <button type="submit" :id="user.id" @click="deleteUser(user.id)">刪除</button> </td>
             </tr>
-            {{ selectid }} <br>
+            <!-- {{ selectid }} <br> -->
             <button type="submit" @click="multidelete"> 刪除 </button>
-        </table> <br>
-        
-    </div>    
-
-    <script src="js/createForm.js"></script>
+        </table> <br>        
+    </div>
+    
+    <script src="js/createForm.js"></script>    
     <script src="js/users_list.js"></script>
+   
         
 </body>
 </html>
