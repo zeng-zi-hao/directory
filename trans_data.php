@@ -8,10 +8,10 @@
 
     while($result = $users_list -> fetchRow()) {
         $temp[] = array(
-            'id' => $result['id'],
-            'name' => $result['name'],
-            'phone' => $result['phone'],
-            'remark' => $result['remark']
+            'id' => htmlspecialchars_decode($result['id'],ENT_QUOTES),
+            'name' => htmlspecialchars_decode($result['name'],ENT_QUOTES),  
+            'phone' => htmlspecialchars_decode($result['phone'],ENT_QUOTES),
+            'remark' => htmlspecialchars_decode($result['remark'],ENT_QUOTES)
         );
     }
 
