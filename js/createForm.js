@@ -3,11 +3,11 @@ Vue.createApp({
     
     data(){
         return{
-            alertMessage: '',  // 成功訊息
-            successMessage: '',  // 錯誤訊息
-            name:'',  // 表單姓名欄位
-            phone:'',  // 表單電話欄位
-            remark:'',  // 表單備註欄位
+            Create_Success_Message: '',  // 錯誤訊息
+            Create_Alert_Message: '',  // 成功訊息            
+            Create_name:'',  // 表單姓名欄位
+            Create_phone:'',  // 表單電話欄位
+            Create_remark:'',  // 表單備註欄位
             
         };        
     },
@@ -16,33 +16,33 @@ Vue.createApp({
         // 驗證創建user表單的資料
         // 將輸入資料用spilt切割，判斷長度與空值
         validate(){
-            checkName = this.name.split('');
-            checkPhone = this.phone.split('');
-            checkRemark = this.remark.split('');
+            checkName = this.Create_name.split('');
+            checkPhone = this.Create_phone.split('');
+            checkRemark = this.Create_remark.split('');
             
             if(checkName.length == 0) {
-                this.successMessage = '';
-                this.alertMessage = '姓名是必填欄位';
+                this.Create_Success_Message = '';
+                this.Create_Alert_Message = '姓名是必填欄位';
                 return false;
             }
             else if(checkPhone.length == 0){
-                this.successMessage = '';
-                this.alertMessage = '電話是必填欄位';
+                this.Create_Success_Message = '';
+                this.Create_Alert_Message = '電話是必填欄位';
                 return false
             }
             else if(checkName.length > 5){
-                this.successMessage = '';
-                this.alertMessage = '姓名不得超過5個字元';
+                this.Create_Success_Message = '';
+                this.Create_Alert_Message = '姓名不得超過5個字元';
                 return false
             }
             else if(checkPhone.length > 10){
-                this.successMessage = '';
-                this.alertMessage = '電話不得超過10個字元';
+                this.Create_Success_Message = '';
+                this.Create_Alert_Message = '電話不得超過10個字元';
                 return false
             }
             else{
-                this.successMessage = '已送出';
-                this.alertMessage = '';
+                this.Create_Success_Message = '已送出';
+                this.Create_Alert_Message = '';
                 return true;                
             }
         },
@@ -53,9 +53,9 @@ Vue.createApp({
             if(this.validate()){
                 axios           
                     .post('create.php',{
-                        name: this.name,
-                        phone: this.phone,
-                        remark: this.remark,
+                        name: this.Create_name,
+                        phone: this.Create_phone,
+                        remark: this.Create_remark,
                     })                
                         .then(response => {                            
                             console.log(response);
@@ -69,9 +69,9 @@ Vue.createApp({
 
         // 清空表單
         clearForm(){
-            this.name = '';
-            this.phone = '';
-            this.remark = '';
+            this.Create_name = '';
+            this.Create_phone = '';
+            this.Create_remark = '';
         },        
     },
     mounted(){  

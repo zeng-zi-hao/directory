@@ -14,15 +14,15 @@
     <!-- 新增user表單 引用createForm.js -->
     <div id="Form">
         <div  style="height:50px">
-            <p style="color:greenyellow"> {{ successMessage }} </p> 
-            <p style="color:red"> {{ alertMessage }} </p> 
+            <p style="color:greenyellow"> {{ Create_Success_Message }} </p> 
+            <p style="color:red"> {{ Create_Alert_Message }} </p> 
         </div>           
         <form>
             <table border="1">
                 <tr>
-                   <td>*姓名: <input type="text" v-model="name"></td>
-                   <td>*電話: <input type="text" v-model="phone"></td>
-                   <td>備註: <textarea type="text" v-model="remark" rows="1"></textarea></textarea></td>
+                   <td>*姓名: <input type="text" v-model="Create_name"></td>
+                   <td>*電話: <input type="text" v-model="Create_phone"></td>
+                   <td>備註: <textarea type="text" v-model="Create_remark" rows="1"></textarea></textarea></td>
                    <td>
                         &nbsp;
                         <button type="button" @click="sendForm">建立</button> &nbsp; 
@@ -38,8 +38,8 @@
 
         <!-- 訊息提示列 -->
         <div  style="height:30px">
-            <p style="color:greenyellow"> {{ successMessage }} </p> 
-            <p style="color:red"> {{ alertMessage }} </p> 
+            <p style="color:greenyellow"> {{ Edit_Success_Message }} </p> 
+            <p style="color:red"> {{ Edit_Alert_Message }} </p> 
         </div>
 
         <div style="width:665px">

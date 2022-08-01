@@ -1,8 +1,8 @@
 Vue.createApp({
     data(){
         return{
-            successMessage:'',  // 成功訊息
-            alertMessage:'',  // 錯誤訊息
+            Edit_Success_Message:'',  // 成功訊息
+            Edit_Alert_Message:'',  // 錯誤訊息
             foo:[],  // 共用暫存陣列
             allselected:false,  // 預設全選按鈕狀態        
             selectid: [],  // 存被選中checkbox的id
@@ -35,13 +35,13 @@ Vue.createApp({
         changeName(user,event){
             checkName = event.target.value;
             if(checkName.length == 0) {
-                this.successMessage = '';
-                this.alertMessage = '姓名是必填欄位';
+                this.Edit_Success_Message = '';
+                this.Edit_Alert_Message = '姓名是必填欄位';
                 event.target.value = user.name;  // 發生錯誤後，返回上一個正確的數值
             }
             else if(checkName.length > 5){
-                this.successMessage = '';
-                this.alertMessage = '姓名不得超過5個字元';
+                this.Edit_Success_Message = '';
+                this.Edit_Alert_Message = '姓名不得超過5個字元';
                 event.target.value = user.name;  // 發生錯誤後，返回上一個正確的數值
             }
             else{
@@ -53,8 +53,8 @@ Vue.createApp({
                 })
                     .then(response => {
                         this.getAllUserList()
-                        this.successMessage = '姓名已編輯';
-                        this.alertMessage = '';
+                        this.Edit_Success_Message = '姓名已編輯';
+                        this.Edit_Alert_Message = '';
                         this.query = '';                    
                         console.log(event);                  
                     })
@@ -67,13 +67,13 @@ Vue.createApp({
         changePhone(user,event){
             checkPhone = event.target.value;
             if(checkPhone.length == 0){
-                this.successMessage = '';
-                this.alertMessage = '電話是必填欄位';
+                this.Edit_Success_Message = '';
+                this.Edit_Alert_Message = '電話是必填欄位';
                 event.target.value = user.phone;  // 發生錯誤後，返回上一個正確的數值
             }
             else if(checkPhone.length > 10){
-                this.successMessage = '';
-                this.alertMessage = '電話不得超過10個字元';
+                this.Edit_Success_Message = '';
+                this.Edit_Alert_Message = '電話不得超過10個字元';
                 event.target.value = user.phone;  // 發生錯誤後，返回上一個正確的數值
             }
             else{
@@ -85,8 +85,8 @@ Vue.createApp({
                 })
                     .then(response => {  
                         this.getAllUserList()
-                        this.successMessage = '電話已編輯';
-                        this.alertMessage = '';
+                        this.Edit_Success_Message = '電話已編輯';
+                        this.Edit_Alert_Message = '';
                         this.query = '';                   
                         console.log(event);                   
                     })
@@ -105,8 +105,8 @@ Vue.createApp({
                 })
                     .then(response => {
                         this.getAllUserList()
-                        this.successMessage = '備註已編輯';
-                        this.alertMessage = '';
+                        this.Edit_Success_Message = '備註已編輯';
+                        this.Edit_Alert_Message = '';
                         this.query = '';                     
                         console.log(event);                 
                     })
