@@ -37,7 +37,8 @@
                         </td>
                    </tr>
                </table>
-            </form> <br/>      
+            </form> <br/>
+
         </div>
 
         <!-- edit 訊息提示列 -->
@@ -47,6 +48,7 @@
         </div>
 
         <div style="width:665px">
+
             <!-- 全選刪除，垃圾桶按鈕樣式 -->
             <button style="float:left" type="button" @click="multidelete">
                 <i class="bi bi-trash"></i> 
@@ -56,13 +58,14 @@
             <div style="float:right">
                 搜尋欄: <input v-model="query" @keyup="fetchData()"><br><br>
             </div>
+
         </div> 
         
         <!-- 使用者列表 -->
-        <table border="1" style="margin-top:35px;width:670px;">            
-            <tr style="width:1200px;">
+        <table border="1" style="margin-top:35px;width:670px;">  
 
-                <!-- 列表的標題 -->
+            <tr style="width:1200px;">
+                <!-- user列表的標題 -->
                 <td> <input type="checkbox" v-model="allselected" @click="selectAll"></td>
                 <td style="width:48px"> 編號 </td>
                 <td style="width:179px"> *姓名 </td>
@@ -91,7 +94,6 @@
     </div>  
     
     <script src="js/users_list.js"></script>
-    <script src="js/createForm.js"></script>
     
 </body>
 </html>

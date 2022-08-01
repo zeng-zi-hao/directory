@@ -1,6 +1,10 @@
 Vue.createApp({
     data(){
         return{ 
+            
+            // debug mode
+            debug_status: true,
+
             // 創建表單
             Create_Success_Message: '',  // 錯誤訊息
             Create_Alert_Message: '',  // 成功訊息            
@@ -11,7 +15,6 @@ Vue.createApp({
             // 編輯表單
             Edit_Success_Message:'',  // 成功訊息
             Edit_Alert_Message:'',  // 錯誤訊息
-            foo:[],  // 共用暫存陣列
             allselected:false,  // 預設全選按鈕狀態        
             selectid: [],  // 存被選中checkbox的id
             users:[],  // 資料庫中所有的user
@@ -29,8 +32,10 @@ Vue.createApp({
                 .get('json/data.json')  
                     .then(response => {                    
                         this.users = response.data.result;
-                        // console.log(response); 
-                        console.log(this.users);                  
+                        if(this.debug_status){
+                            console.log('目前JSON檔所有人',this.users);   
+                            console.log('--------------分隔線-----------------');
+                        }                                       
                     })
                     .catch(error => {
                         console.log('錯誤:',error); 
@@ -97,7 +102,9 @@ Vue.createApp({
                             this.getAllUserList();
                             this.query = '';
                             this.nodata = false;
-                            console.log(response);
+                            if(this.debug_status){
+                                console.log('送出表單狀態為',response.statusText);
+                            }                            
                         })
                         .catch(error => {
                             console.log(error);
@@ -142,8 +149,11 @@ Vue.createApp({
                         this.getAllUserList()
                         this.Edit_Success_Message = '姓名已編輯';
                         this.Edit_Alert_Message = '';
-                        this.query = '';                    
-                        console.log(event);                  
+                        this.query = '';
+                        if(this.debug_status){
+                            console.log('姓名已編輯');                      
+                            console.log('事件為',event.type);  
+                        }                                          
                     })
                     .catch(error => {
                         console.log('錯誤:',error); 
@@ -174,8 +184,11 @@ Vue.createApp({
                         this.getAllUserList()
                         this.Edit_Success_Message = '電話已編輯';
                         this.Edit_Alert_Message = '';
-                        this.query = '';                   
-                        console.log(event);                   
+                        this.query = ''; 
+                        if(this.debug_status){
+                            console.log('電話已編輯');                      
+                            console.log('事件為',event.type);  
+                        }                 
                     })
                     .catch(error => {
                         console.log('錯誤:',error); 
@@ -194,8 +207,11 @@ Vue.createApp({
                         this.getAllUserList()
                         this.Edit_Success_Message = '備註已編輯';
                         this.Edit_Alert_Message = '';
-                        this.query = '';                     
-                        console.log(event);                 
+                        this.query = '';
+                        if(this.debug_status){
+                            console.log('備註已編輯');                      
+                            console.log('事件為',event.type); 
+                        }               
                     })
                     .catch(error => {
                         console.log('錯誤:',error); 
@@ -210,7 +226,10 @@ Vue.createApp({
                 .post('deleteUser.php',{id})
                     .then(response => {                      
                         this.getAllUserList()
-                        this.query = '';                                                    
+                        this.query = '';
+                        if(this.debug_status){
+                            console.log('已刪除的資料庫ID為',id)
+                        }                                                                            
                     })
                     .catch(error => {
                         console.log('錯誤:',error); 
@@ -219,19 +238,18 @@ Vue.createApp({
 
         // 全選checkbox
         // 預設allselected為false
-        // 先將foo[]與selectid[]清空
-        // for迴圈將目前所有checkbox id放進暫存的foo[]，形成巢狀迴圈。[1],[2],[3]
-        // selectid 存放只用flat()將foo[]攤平的陣列。[1,2,3]
+        // 先將selectid[]清空
+        // for迴圈將目前所有checkbox id放進暫存的selectid[]，形成迴圈。[1],[2],[3]
         selectAll(){
             if(!this.allselected){
-                this.foo = [];
                 this.selectid = []; 
                 for(i=0;i<this.users.length;i++){
-                    this.foo.push(this.users[i].id);     
-                    this.selectid = this.foo.flat();                                       
-                };            
+                    this.selectid.push(this.users[i].id);                                          
+                };
+                if(this.deleteUser){
+                    console.log('已選取checkbox的資料庫ID為',this.selectid); 
+                }        
             }else{
-                this.foo = [];
                 this.selectid = [];                
             }                          
         },
@@ -247,15 +265,16 @@ Vue.createApp({
                         .then(response => {                      
                             this.getAllUserList();
                             this.allselected = false;
-                            this.foo = [];
+                            if(this.debug_status){
+                                console.log('已刪除的資料庫ID為',this.selectid); 
+                            }                             
                             this.selectid = [];
-                            this.query = ''; 
-                            // console.log(this.selectid)                                                
+                            this.query = '';                                           
                         })
                         .catch(error => {
                             console.log('錯誤:',error); 
                         })
-            }                     
+            }                    
         },
 
         // @keyup事件，監視鍵盤操作事件
