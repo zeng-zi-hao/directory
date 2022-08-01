@@ -263,24 +263,25 @@ Vue.createApp({
         // @onclick事件，刪除全部cheack id
         // 用for迴圈將selectid[]的值一個個丟到deleteUser.php進行刪除
         multidelete(){ 
-            for(i=0;i<this.selectid.length;i++){
+            if(this.debug_status){
+                console.log('已刪除的資料庫ID為',this.selectid); 
+            }  
+
+            for(i=0;i<=this.selectid.length;i++){
                 axios 
                     .post('deleteUser.php',{
                         id: this.selectid[i]
                     })
-                        .then(response => {                      
-                            this.getAllUserList();
-                            this.allselected = false;
-                            if(this.debug_status){
-                                console.log('已刪除的資料庫ID為',this.selectid); 
-                            }                             
+                        .then(response => {                     
+                            this.allselected = false;  
                             this.selectid = [];
                             this.query = '';                                           
-                        })
+                        })                        
                         .catch(error => {
                             console.log('錯誤:',error); 
-                        })
-            }                    
+                        })   
+            }
+            this.getAllUserList()                    
         },
 
         // @keyup事件，監視鍵盤操作事件
