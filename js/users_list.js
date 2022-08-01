@@ -1,17 +1,28 @@
 Vue.createApp({
     data(){
-        return{
+        return{ 
+            // 創建表單
+            Create_Success_Message: '',  // 錯誤訊息
+            Create_Alert_Message: '',  // 成功訊息            
+            Create_name:'',  // 表單姓名欄位
+            Create_phone:'',  // 表單電話欄位
+            Create_remark:'',  // 表單備註欄位
+
+            // 編輯表單
             Edit_Success_Message:'',  // 成功訊息
             Edit_Alert_Message:'',  // 錯誤訊息
             foo:[],  // 共用暫存陣列
             allselected:false,  // 預設全選按鈕狀態        
             selectid: [],  // 存被選中checkbox的id
             users:[],  // 資料庫中所有的user
-            query:'',
+
+            // 搜尋欄
+            query:'', //存放使用者輸入搜尋欄位的關鍵字
             nodata: false,
         };
     },
     methods:{
+
         // 前端去json檔取得所有使用者資料
         getAllUserList(){
             axios
@@ -24,6 +35,82 @@ Vue.createApp({
                     .catch(error => {
                         console.log('錯誤:',error); 
                     })                
+        },
+
+        // 驗證create表單的資料
+        // 將輸入資料用spilt切割，判斷長度與空值
+        validate(){
+
+            // 驗證電話規則
+            // 正則表達式(regex)，/**/ 等同於 new RegExp()，是js內建函數，用來比對符合自訂規則的文字
+            // \d代表只能包含0~9
+            phone_isnum = /(^\d+)/;  
+
+            checkName = this.Create_name.split('');
+            checkPhone = this.Create_phone.split('');
+            checkRemark = this.Create_remark.split('');
+            
+            if(checkName.length == 0) {
+                this.Create_Success_Message = '';
+                this.Create_Alert_Message = '姓名是必填欄位';
+                return false;
+            }
+            else if(checkPhone.length == 0){
+                this.Create_Success_Message = '';
+                this.Create_Alert_Message = '電話是必填欄位';
+                return false
+            }
+            else if(checkName.length > 5){
+                this.Create_Success_Message = '';
+                this.Create_Alert_Message = '姓名不得超過5個字元';
+                return false
+            }
+            else if(checkPhone.length > 10){
+                this.Create_Success_Message = '';
+                this.Create_Alert_Message = '電話不得超過10個字元';
+                return false
+            }
+            else if(!phone_isnum.test(checkPhone)){
+                this.Create_Success_Message = '';
+                this.Create_Alert_Message = '電話欄位請輸入數字';
+                return false
+            }
+            else{
+                this.Create_Success_Message = '已送出';
+                this.Create_Alert_Message = '';
+                return true;                
+            }
+        },
+
+        // onclick送出表單事件
+        // 最優先呼叫validate()驗證使用者輸入是否符合規則
+        // 送出後清空表單、清空搜尋欄、nodata變成false
+        sendForm(){    
+            if(this.validate()){
+                axios           
+                    .post('create.php',{
+                        name: this.Create_name,
+                        phone: this.Create_phone,
+                        remark: this.Create_remark,
+                    })                
+                        .then(response => {     
+                            this.getAllUserList();
+                            this.query = '';
+                            this.nodata = false;
+                            console.log(response);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        }) 
+                        this.clearForm();
+            }
+        },
+
+        // 清空表單
+        clearForm(){
+            this.Create_name = '';
+            this.Create_phone = '';
+            this.Create_remark = '';
         },
 
         // @change事件
@@ -141,8 +228,8 @@ Vue.createApp({
                 this.selectid = []; 
                 for(i=0;i<this.users.length;i++){
                     this.foo.push(this.users[i].id);     
-                    this.selectid = this.foo.flat();                   
-                };                 
+                    this.selectid = this.foo.flat();                                       
+                };            
             }else{
                 this.foo = [];
                 this.selectid = [];                
@@ -151,7 +238,7 @@ Vue.createApp({
 
         // @onclick事件，刪除全部cheack id
         // 用for迴圈將selectid[]的值一個個丟到deleteUser.php進行刪除
-        multidelete(){
+        multidelete(){ 
             for(i=0;i<this.selectid.length;i++){
                 axios 
                     .post('deleteUser.php',{
@@ -163,7 +250,7 @@ Vue.createApp({
                             this.foo = [];
                             this.selectid = [];
                             this.query = ''; 
-                            console.log(this.selectid)                                                
+                            // console.log(this.selectid)                                                
                         })
                         .catch(error => {
                             console.log('錯誤:',error); 

@@ -3,11 +3,7 @@ Vue.createApp({
     
     data(){
         return{
-            Create_Success_Message: '',  // 錯誤訊息
-            Create_Alert_Message: '',  // 成功訊息            
-            Create_name:'',  // 表單姓名欄位
-            Create_phone:'',  // 表單電話欄位
-            Create_remark:'',  // 表單備註欄位
+
             
         };        
     },
@@ -46,33 +42,9 @@ Vue.createApp({
                 return true;                
             }
         },
-        // onclick送出表單事件
-        // 最優先呼叫validate()驗證使用者輸入是否符合規則
-        // 送出後清空表單
-        sendForm(){    
-            if(this.validate()){
-                axios           
-                    .post('create.php',{
-                        name: this.Create_name,
-                        phone: this.Create_phone,
-                        remark: this.Create_remark,
-                    })                
-                        .then(response => {                            
-                            console.log(response);
-                        })
-                        .catch(error => {
-                            console.log(error);
-                        }) 
-                        this.clearForm();
-            }
-        },
+        
 
-        // 清空表單
-        clearForm(){
-            this.Create_name = '';
-            this.Create_phone = '';
-            this.Create_remark = '';
-        },        
+                
     },
     mounted(){  
           
