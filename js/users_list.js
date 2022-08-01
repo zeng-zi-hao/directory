@@ -5,6 +5,10 @@ Vue.createApp({
             // debug mode
             debug_status: true,
 
+            // 驗證電話規則
+            // 正則表達式(regex)，/**/ 等同於 new RegExp()，是js內建函數，用來比對符合自訂規則的文字
+            // \d代表只能包含0~9
+            // phone_isnum = /(^\d+)/; 
             phone_isnum: /(^\d+)/,  
 
             // 創建表單
@@ -47,11 +51,6 @@ Vue.createApp({
         // 驗證create表單的資料
         // 將輸入資料用spilt切割，判斷長度與空值
         validate(){
-
-            // 驗證電話規則
-            // 正則表達式(regex)，/**/ 等同於 new RegExp()，是js內建函數，用來比對符合自訂規則的文字
-            // \d代表只能包含0~9
-            // phone_isnum = /(^\d+)/;  
 
             checkName = this.Create_name.split('');
             checkPhone = this.Create_phone.split('');
@@ -307,7 +306,7 @@ Vue.createApp({
                             }                 
                         })
                         .catch(error => { 
-                            console.log('錯誤:',error);
+                            // console.log('錯誤:',error);
                         })
             }
             else{

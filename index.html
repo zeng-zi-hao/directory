@@ -29,7 +29,7 @@
                     <tr>
                        <td>*姓名: <input type="text" v-model="Create_name"></td>
                        <td>*電話: <input type="text" v-model="Create_phone"></td>
-                       <td>備註: <textarea type="text" v-model="Create_remark" rows="1"></textarea></textarea></td>
+                       <td>備註: <textarea type="text" v-model="Create_remark" cols="50" rows="1"></textarea></textarea></td>
                        <td>
                             &nbsp;
                             <button type="button" @click="sendForm">建立</button> &nbsp; 
@@ -47,7 +47,7 @@
             <p style="color:red"> {{ Edit_Alert_Message }} </p> 
         </div>
 
-        <div style="width:665px">
+        <div style="width:895px">
 
             <!-- 全選刪除，垃圾桶按鈕樣式 -->
             <button style="float:left" type="button" @click="multidelete">
@@ -62,12 +62,12 @@
         </div> 
         
         <!-- 使用者列表 -->
-        <table border="1" style="margin-top:35px;width:670px;">  
+        <table border="1" style="margin-top:35px;width:900px;">  
 
             <tr style="width:1200px;">
                 <!-- user列表的標題 -->
-                <td> <input type="checkbox" v-model="allselected" @click="selectAll"></td>
-                <td style="width:48px"> 編號 </td>
+                <td style="width:24px"> <input type="checkbox" v-model="allselected" @click="selectAll"></td>
+                <td style="width:50px"> 編號 </td>
                 <td style="width:179px"> *姓名 </td>
                 <td style="width:179px"> *電話 </td>
                 <td style="width:179px"> 備註 </td>
@@ -80,7 +80,7 @@
                 <td> {{index+1}} </td>
                 <td> <input :value="user.name" @change="changeName(user,$event)"> </td>
                 <td> <input :value="user.phone" @change="changePhone(user,$event)"> </td>
-                <td> <textarea rows="1" @change="changeRemark(user,$event)">{{ user.remark }}</textarea> </td>
+                <td> <textarea rows="1" cols="50" @change="changeRemark(user,$event)">{{ user.remark }}</textarea> </td>
                 <!-- <td> <input :value="user.remark" @change="changeRemark(user,$event)"> </td> -->
                 <td> <button type="button" :id="user.id" @click="deleteUser(user.id)">刪除</button> </td>
             </tr>
