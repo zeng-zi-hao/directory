@@ -5,6 +5,8 @@ Vue.createApp({
             // debug mode
             debug_status: true,
 
+            phone_isnum: /(^\d+)/,  
+
             // 創建表單
             Create_Success_Message: '',  // 錯誤訊息
             Create_Alert_Message: '',  // 成功訊息            
@@ -49,7 +51,7 @@ Vue.createApp({
             // 驗證電話規則
             // 正則表達式(regex)，/**/ 等同於 new RegExp()，是js內建函數，用來比對符合自訂規則的文字
             // \d代表只能包含0~9
-            phone_isnum = /(^\d+)/;  
+            // phone_isnum = /(^\d+)/;  
 
             checkName = this.Create_name.split('');
             checkPhone = this.Create_phone.split('');
@@ -75,7 +77,7 @@ Vue.createApp({
                 this.Create_Alert_Message = '電話不得超過10個字元';
                 return false
             }
-            else if(!phone_isnum.test(checkPhone)){
+            else if(!this.phone_isnum.test(checkPhone)){
                 this.Create_Success_Message = '';
                 this.Create_Alert_Message = '電話欄位請輸入數字';
                 return false
@@ -171,6 +173,11 @@ Vue.createApp({
             else if(checkPhone.length > 10){
                 this.Edit_Success_Message = '';
                 this.Edit_Alert_Message = '電話不得超過10個字元';
+                event.target.value = user.phone;  // 發生錯誤後，返回上一個正確的數值
+            }
+            else if(!this.phone_isnum.test(checkPhone)){
+                this.Edit_Success_Message = '';
+                this.Edit_Alert_Message = '電話欄位請輸入數字';
                 event.target.value = user.phone;  // 發生錯誤後，返回上一個正確的數值
             }
             else{
