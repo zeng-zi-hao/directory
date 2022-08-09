@@ -3,27 +3,41 @@
 
     $request = json_decode(file_get_contents("php://input"));
     
-    $status = $request -> status;
+    $status = $request -> status; 
 
     switch($status){
         case "name":
             $id = $request -> id;
             $name = $request -> name;
-            $name = htmlspecialchars($name,ENT_QUOTES);
-            $conn -> execute(" UPDATE users SET name='$name' WHERE id = $id ");
+            $name = $conn -> addQ(trim($name));
+            $name_arr = str_split($name);
+            if($name_arr[0] == ""){        
+            }
+            elseif(count($name_arr) > 5){
+            }
+            else{
+                $conn -> execute(" UPDATE users SET name='$name' WHERE id = $id ");
+            }            
             include('trans_data.php');
         
         case "phone":
             $id = $request -> id;
             $phone = $request -> phone;
-            $phone = htmlspecialchars($phone,ENT_QUOTES);
-            $conn -> execute(" UPDATE users SET phone='$phone' WHERE id = $id ");
+            $phone = $conn -> addQ(trim($phone));
+            $phone_arr = str_split($phone);
+            if($phone_arr[0] == ""){        
+            }
+            elseif(count($phone_arr) > 10){
+            }
+            else{
+                $conn -> execute(" UPDATE users SET phone='$phone' WHERE id = $id ");
+            }            
             include('trans_data.php');
 
         case "remark":
             $id = $request -> id;
             $remark = $request -> remark;
-            $remark = htmlspecialchars($remark,ENT_QUOTES);
+            $remark = $conn -> addQ(trim($remark));
             $conn -> execute(" UPDATE users SET remark='$remark' WHERE id = $id ");
             include('trans_data.php');
     }

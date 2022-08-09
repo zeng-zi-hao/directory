@@ -11,7 +11,7 @@
     // $conn -> autoExecute($table, $record, 'INSERT');
 
     // execute
-    $conn -> execute(" INSERT INTO users VALUES('', 'henry', '0932185585', 'Hello Workd!!')");
+    $conn -> execute(" INSERT INTO users VALUES('', 'henry', '0932185585', 'Hello World!!')");
     $conn -> execute(" INSERT INTO users VALUES('', '曾子豪', '0911063656', 'Goodbye World!')");
     $conn -> execute(" INSERT INTO users VALUES('', 'WREN', '0912394878', ''')");
     $conn -> execute(" INSERT INTO users VALUES('', 'VERA', '0952768902', '<>')");
@@ -26,4 +26,4 @@
     $conn -> execute(" INSERT INTO users VALUES('', 'JACK', '0934297657', 'four')");
     $conn -> execute(" INSERT INTO users VALUES('', 'JOE', '0953128293', 'five')");
     $conn -> execute(" INSERT INTO users VALUES('', 'NOLA', '0927696704', 'one')");
-    $conn -> execute(" INSERT INTO users VALUES('', 'ALEC', '0955549001', 'two')");
+    $conn -> execute(" INSERT INTO users VALUES('', 'ALEC', '0955549001', 'y')");

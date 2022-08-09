@@ -8,7 +8,6 @@ Vue.createApp({
             // 驗證電話規則
             // 正則表達式(regex)，/**/ 等同於 new RegExp()，是js內建函數，用來比對符合自訂規則的文字
             // \d代表只能包含0~9
-            // phone_isnum = /(^\d+)/; 
             phone_isnum: /(^\d+)/,  
 
             // 創建表單
@@ -26,8 +25,8 @@ Vue.createApp({
             users:[],  // 資料庫中所有的user
 
             // 搜尋欄
-            query:'', //存放使用者輸入搜尋欄位的關鍵字
-            nodata: false,
+            query:'',  //存放使用者輸入搜尋欄位的關鍵字
+            nodata: false,  //搜尋查無資料會等於true 
         };
     },
     methods:{
@@ -40,6 +39,7 @@ Vue.createApp({
                         this.users = response.data.result;
                         if(this.debug_status){
                             console.log('目前JSON檔所有人',this.users);   
+                            // console.log(response);
                             console.log('--------------分隔線-----------------');
                         }                                       
                     })
@@ -55,6 +55,7 @@ Vue.createApp({
             checkName = this.Create_name.split('');
             checkPhone = this.Create_phone.split('');
             checkRemark = this.Create_remark.split('');
+            
             
             if(checkName.length == 0) {
                 this.Create_Success_Message = '';
@@ -82,8 +83,6 @@ Vue.createApp({
                 return false
             }
             else{
-                this.Create_Success_Message = '已送出';
-                this.Create_Alert_Message = '';
                 return true;                
             }
         },
@@ -91,7 +90,7 @@ Vue.createApp({
         // onclick送出表單事件
         // 最優先呼叫validate()驗證使用者輸入是否符合規則
         // 送出後清空表單、清空搜尋欄、nodata變成false
-        sendForm(){    
+        sendForm(){  
             if(this.validate()){
                 axios           
                     .post('create.php',{
@@ -103,6 +102,8 @@ Vue.createApp({
                             this.getAllUserList();
                             this.query = '';
                             this.nodata = false;
+                            this.Create_Success_Message = '已送出';
+                            this.Create_Alert_Message = '';
                             if(this.debug_status){
                                 console.log('送出表單狀態為',response.statusText);
                             }                            
@@ -128,7 +129,8 @@ Vue.createApp({
         // 驗證使用者輸入，規則與create相同
         // 送出後清除搜索欄(query)
         changeName(user,event){
-            checkName = event.target.value;
+            checkName = event.target.value.trim();
+
             if(checkName.length == 0) {
                 this.Edit_Success_Message = '';
                 this.Edit_Alert_Message = '姓名是必填欄位';
@@ -144,7 +146,7 @@ Vue.createApp({
                 .post('editUser.php',{
                     status: "name",
                     id: user.id,
-                    name: event.target.value,
+                    name: event.target.value.trim(),
                 })
                     .then(response => {
                         this.getAllUserList()
@@ -163,7 +165,7 @@ Vue.createApp({
             
         },
         changePhone(user,event){
-            checkPhone = event.target.value;
+            checkPhone = event.target.value.trim();
             if(checkPhone.length == 0){
                 this.Edit_Success_Message = '';
                 this.Edit_Alert_Message = '電話是必填欄位';
@@ -184,7 +186,7 @@ Vue.createApp({
                 .post('editUser.php',{
                     status: "phone",
                     id: user.id,
-                    phone: event.target.value,
+                    phone: event.target.value.trim(),
                 })
                     .then(response => {  
                         this.getAllUserList()
@@ -207,7 +209,7 @@ Vue.createApp({
                 .post('editUser.php',{
                     status: "remark",
                     id: user.id,
-                    remark: event.target.value,
+                    remark: event.target.value.trim(),
                 })
                     .then(response => {
                         this.getAllUserList()
@@ -251,10 +253,8 @@ Vue.createApp({
                 this.selectid = []; 
                 for(i=0;i<this.users.length;i++){
                     this.selectid.push(this.users[i].id);                                          
-                };
-                if(this.deleteUser){
-                    console.log('已選取checkbox的資料庫ID為',this.selectid); 
-                }        
+                };  
+                console.log('已選取checkbox的資料庫ID為',this.selectid);     
             }else{
                 this.selectid = [];                
             }                          

@@ -27,9 +27,9 @@
             <form>
                 <table border="1">
                     <tr>
-                       <td>*姓名: <input type="text" v-model="Create_name"></td>
-                       <td>*電話: <input type="text" v-model="Create_phone"></td>
-                       <td>備註: <textarea type="text" v-model="Create_remark" cols="50" rows="1"></textarea></textarea></td>
+                       <td>*姓名: <input type="text" v-model.trim="Create_name"></td>
+                       <td>*電話: <input type="text" v-model.trim="Create_phone"></td>
+                       <td>備註: <textarea type="text" v-model.trim="Create_remark" cols="50" rows="1"></textarea></textarea></td>
                        <td>
                             &nbsp;
                             <button type="button" @click="sendForm">建立</button> &nbsp; 

@@ -5,10 +5,9 @@ $driver = 'mysqli';
 $server = 'localhost';
 $user = 'root';
 $password = "";
-$database = 'directory'; # eg. 'mysqli' or 'oci8'
+$database = 'directory';
 
 $conn = adoNewConnection($driver); 
-$conn->debug = false;
 $conn->connect($server, $user, $password, $database);
 
 if(!$conn){

@@ -2,19 +2,35 @@
 
     require_once('ado_conn.php');
 
-    $request = json_decode(file_get_contents("php://input"));    
+
+    $request = json_decode(file_get_contents("php://input"));
     
+    // 取得post資料
     $name = $request -> name;
     $phone = $request -> phone;
     $remark = $request -> remark;
 
-    $name = htmlspecialchars($name,ENT_QUOTES);
-    $phone = htmlspecialchars($phone,ENT_QUOTES);
-    $remark = htmlspecialchars($remark,ENT_QUOTES);
+    // 將資料進行編碼、消除前後空白
+    $name = $conn -> addQ(trim($name));
+    $phone = $conn -> addQ(trim($phone));
+    $remark = $conn -> addQ(trim($remark));
 
-    $conn -> execute(" INSERT INTO users VALUES('', '$name', '$phone', '$remark')");
+    // 切割
+    $name_arr = str_split($name);
+    $phone_arr = str_split($phone);
+    $remark_arr = str_split($remark);
 
-    // echo $name,$phone,$remark;
+    if($name_arr[0] == ""){        
+    }
+    elseif($phone_arr[0] == ""){        
+    }
+    elseif(count($name_arr) > 5){
+    }
+    elseif(count($phone_arr) > 10){
+    }
+    else{
+        $conn -> execute(" INSERT INTO users VALUES('', '$name', '$phone', '$remark')");
+    }
 
     include('trans_data.php');
 
