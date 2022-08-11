@@ -5,9 +5,9 @@
 
     $query = $request -> query;
 
-    $query = htmlspecialchars($query,ENT_QUOTES);
-    
-    if($query != ''){
+    $query = $conn -> addQ(trim($query));
+
+    if($query != ""){
         $query = $conn -> execute("
         SELECT * FROM users
         WHERE name LIKE '%".$query."%' 
@@ -15,25 +15,27 @@
         OR remark LIKE '%".$query."%' 
         ORDER BY id
         ");
+
+        while($result = $query -> fetchRow()){
+            $temp[] = array(
+                'id' => $result['id'],
+                'name' => $result['name'],  
+                'phone' => $result['phone'],
+                'remark' => $result['remark']
+            );
+        }
+
+        $data = [];
+        $data['result'] = $temp;
     }
     else{
         $query = "
         SELECT * FROM users
         ORDER BY id
         ";
+
+        $data['result'] = "";
     }
-    
-    // $temp = array();
-    while($result = $query -> fetchRow()){
-        $temp[] = array(
-            'id' => htmlspecialchars_decode($result['id'],ENT_QUOTES),
-            'name' => htmlspecialchars_decode($result['name'],ENT_QUOTES),  
-            'phone' => htmlspecialchars_decode($result['phone'],ENT_QUOTES),
-            'remark' => htmlspecialchars_decode($result['remark'],ENT_QUOTES)
-        );
-    }
-    $data = [];
-    $data['result'] = $temp;
     
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
 

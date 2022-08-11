@@ -79,9 +79,8 @@
                 <td> <input type="checkbox" :value="user.id" v-model="selectid"> </td>
                 <td> {{index+1}} </td>
                 <td> <input :value="user.name" @change="changeName(user,$event)"> </td>
-                <td> <input :value="user.phone" @change="changePhone(user,$event)"> </td>
+                <td> <input type='tel' :value="user.phone" @change="changePhone(user,$event)"> </td>
                 <td> <textarea rows="1" cols="50" @change="changeRemark(user,$event)">{{ user.remark }}</textarea> </td>
-                <!-- <td> <input :value="user.remark" @change="changeRemark(user,$event)"> </td> -->
                 <td> <button type="button" :id="user.id" @click="deleteUser(user.id)">刪除</button> </td>
             </tr>
 

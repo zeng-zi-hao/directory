@@ -2,6 +2,10 @@
     require_once('ado_conn.php');
 
     $request = json_decode(file_get_contents("php://input"));
+
+    // 驗證規則
+    $phone_isnum = "/^[0-9]*$/";
+    $name_isword = "/^[\u4e00-\u9fa5_a-zA-Z0-9]+$/";
     
     $status = $request -> status; 
 
@@ -14,6 +18,8 @@
             if($name_arr[0] == ""){        
             }
             elseif(count($name_arr) > 5){
+            }
+            else if(preg_match($name_isword,$name) == false){
             }
             else{
                 $conn -> execute(" UPDATE users SET name='$name' WHERE id = $id ");
@@ -28,6 +34,8 @@
             if($phone_arr[0] == ""){        
             }
             elseif(count($phone_arr) > 10){
+            }
+            else if(preg_match($phone_isnum,$name) == false){
             }
             else{
                 $conn -> execute(" UPDATE users SET phone='$phone' WHERE id = $id ");

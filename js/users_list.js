@@ -5,10 +5,11 @@ Vue.createApp({
             // debug mode
             debug_status: true,
 
-            // 驗證電話規則
-            // 正則表達式(regex)，/**/ 等同於 new RegExp()，是js內建函數，用來比對符合自訂規則的文字
+            // 驗證規則
+            // 正則表達式(regex)，/***/ 等同於 new RegExp()，是js內建函數，用來比對符合自訂規則的文字
             // \d代表只能包含0~9
-            phone_isnum: /(^\d+)/,  
+            phone_isnum: /^[0-9]*$/,
+            name_isword: /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/,
 
             // 創建表單
             Create_Success_Message: '',  // 錯誤訊息
@@ -39,7 +40,6 @@ Vue.createApp({
                         this.users = response.data.result;
                         if(this.debug_status){
                             console.log('目前JSON檔所有人',this.users);   
-                            // console.log(response);
                             console.log('--------------分隔線-----------------');
                         }                                       
                     })
@@ -76,8 +76,13 @@ Vue.createApp({
                 this.Create_Success_Message = '';
                 this.Create_Alert_Message = '電話不得超過10個字元';
                 return false
+            }            
+            else if(!this.name_isword.test(this.Create_name)){
+                this.Create_Success_Message = '';
+                this.Create_Alert_Message = '姓名欄位請物輸入特殊字';
+                return false
             }
-            else if(!this.phone_isnum.test(checkPhone)){
+            else if(!this.phone_isnum.test(this.Create_phone)){
                 this.Create_Success_Message = '';
                 this.Create_Alert_Message = '電話欄位請輸入數字';
                 return false
@@ -141,6 +146,11 @@ Vue.createApp({
                 this.Edit_Alert_Message = '姓名不得超過5個字元';
                 event.target.value = user.name;  // 發生錯誤後，返回上一個正確的數值
             }
+            else if(!this.name_isword.test(checkName)){
+                this.Edit_Success_Message = '';
+                this.Edit_Alert_Message = '姓名欄位請物輸入特殊字';
+                event.target.value = user.name;  // 發生錯誤後，返回上一個正確的數值
+            }
             else{
                 axios
                 .post('editUser.php',{
@@ -166,6 +176,7 @@ Vue.createApp({
         },
         changePhone(user,event){
             checkPhone = event.target.value.trim();
+            
             if(checkPhone.length == 0){
                 this.Edit_Success_Message = '';
                 this.Edit_Alert_Message = '電話是必填欄位';
@@ -248,7 +259,7 @@ Vue.createApp({
         // 預設allselected為false
         // 先將selectid[]清空
         // for迴圈將目前所有checkbox id放進暫存的selectid[]，形成迴圈。[1],[2],[3]
-        selectAll(){
+        selectAll(){ 
             if(!this.allselected){
                 this.selectid = []; 
                 for(i=0;i<this.users.length;i++){
@@ -261,34 +272,30 @@ Vue.createApp({
         },
 
         // @onclick事件，刪除全部cheack id
-        // 用for迴圈將selectid[]的值一個個丟到deleteUser.php進行刪除
+        // 將selectid用陣列的方式post
         multidelete(){ 
-            if(this.debug_status){
-                console.log('已刪除的資料庫ID為',this.selectid); 
-            }  
-
-            for(i=0;i<=this.selectid.length;i++){
-                axios 
-                    .post('deleteUser.php',{
-                        id: this.selectid[i]
+            axios
+                .post('deleteUser.php',{
+                    id: this.selectid,
+                })
+                    .then(response => {
+                        if(this.debug_status){
+                            console.log('已刪除的資料庫ID為',this.selectid)
+                        }  
+                        this.getAllUserList();
+                        this.allselected = false;
+                        this.selectid = [];
+                        this.query = '';                        
                     })
-                        .then(response => {                     
-                            this.allselected = false;  
-                            this.selectid = [];
-                            this.query = '';                                           
-                        })                        
-                        .catch(error => {
-                            console.log('錯誤:',error); 
-                        })   
-            }
-            this.getAllUserList()                    
+                    .catch(error => {
+                        console.log('錯誤:',error);
+                    })                                
         },
 
         // @keyup事件，監視鍵盤操作事件
         // query為使用者目前輸入的值
         // nodata為布林，存放判斷使用者輸入是否存在於列表當中的狀態
         // post到query.php進行sql的全表搜索，並回傳json的陣列
-        // 有進行html字元的編碼與解碼
         fetchData(){
             this.nodata = false;
             if(this.query != ''){
@@ -297,14 +304,14 @@ Vue.createApp({
                         query: this.query
                     })
                         .then(response => {
-                            this.users = response.data.result;
-                            if(response.data.indexOf('null') > 0){
+                            this.users = response.data.result;       
+                            if(response.data.result == "" || response.data.indexOf('null') > 0 ){
                                 this.users = [];
                                 this.nodata = true;
-                            }
-                            else {
-                                this.users = response.data.result;
-                            }                 
+                                if(this.debug_status){
+                                    console.log('搜尋結果: 資料庫找不到相關的資料')
+                                }  
+                            }             
                         })
                         .catch(error => { 
                             // console.log('錯誤:',error);
