@@ -7,7 +7,6 @@ Vue.createApp({
 
             // 驗證規則
             // 正則表達式(regex)，/***/ 等同於 new RegExp()，是js內建函數，用來比對符合自訂規則的文字
-            // \d代表只能包含0~9
             phone_isnum: /^[0-9]*$/,
             name_isword: /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/,
 
@@ -35,11 +34,11 @@ Vue.createApp({
         // 前端去json檔取得所有使用者資料
         getAllUserList(){
             axios
-                .get('json/data.json')  
+                .get('data.php')  
                     .then(response => {                    
                         this.users = response.data.result;
                         if(this.debug_status){
-                            console.log('目前JSON檔所有人',this.users);   
+                            console.log('目前資料庫所有人',this.users);   
                             console.log('--------------分隔線-----------------');
                         }                                       
                     })
@@ -95,7 +94,7 @@ Vue.createApp({
         // onclick送出表單事件
         // 最優先呼叫validate()驗證使用者輸入是否符合規則
         // 送出後清空表單、清空搜尋欄、nodata變成false
-        sendForm(){  
+        sendForm(){ 
             if(this.validate()){
                 axios           
                     .post('create.php',{

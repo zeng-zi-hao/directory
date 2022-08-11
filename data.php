@@ -2,7 +2,7 @@
     
     require_once('ado_conn.php');
 
-    $users_list = $conn -> execute(" SELECT id,name,phone,remark FROM users ");    
+    $users_list = $conn -> execute(" SELECT id,name,phone,remark FROM users ORDER BY id desc ");    
 
     $temp = array();
 
@@ -18,7 +18,7 @@
     $json_data = [];
     $json_data['result'] = $temp;
 
-    file_put_contents('json/data.json',json_encode($json_data, JSON_UNESCAPED_UNICODE));
+    echo json_encode($json_data, JSON_UNESCAPED_UNICODE);
 
     $conn->close();
     

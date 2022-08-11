@@ -13,7 +13,7 @@
         WHERE name LIKE '%".$query."%' 
         OR phone LIKE '%".$query."%'
         OR remark LIKE '%".$query."%' 
-        ORDER BY id
+        ORDER BY id desc
         ");
 
         while($result = $query -> fetchRow()){
@@ -31,7 +31,7 @@
     else{
         $query = "
         SELECT * FROM users
-        ORDER BY id
+        ORDER BY id desc
         ";
 
         $data['result'] = "";

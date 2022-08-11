@@ -27,14 +27,14 @@
     // 判斷create規則
     if($name_arr[0] == "" || $phone_arr[0] == ""){
     }
-    elseif(count($name_arr) > 5 || count($phone_arr) > 10){
+    if(count($name_arr) > 5 || count($phone_arr) > 10){
     }
-    else if(preg_match($name_isword,$name) == false || preg_match($phone_isnum,$phone)  == false){  
+    elseif(preg_match($name_isword,$name) == false || preg_match($phone_isnum,$phone)  == false){  
     }
     else{
         $conn -> execute(" INSERT INTO users VALUES('', '$name', '$phone', '$remark')");
     }    
            
-    include('trans_data.php');
+    include('data.php');
 
     $conn->close();

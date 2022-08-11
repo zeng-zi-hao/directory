@@ -8,10 +8,10 @@
     $name_isword = "/^[\u4e00-\u9fa5_a-zA-Z0-9]+$/";
     
     $status = $request -> status; 
+    $id = $request -> id;
 
     switch($status){
         case "name":
-            $id = $request -> id;
             $name = $request -> name;
             $name = $conn -> addQ(trim($name));
             $name_arr = str_split($name);
@@ -24,10 +24,9 @@
             else{
                 $conn -> execute(" UPDATE users SET name='$name' WHERE id = $id ");
             }            
-            include('trans_data.php');
+            include('data.php');
         
         case "phone":
-            $id = $request -> id;
             $phone = $request -> phone;
             $phone = $conn -> addQ(trim($phone));
             $phone_arr = str_split($phone);
@@ -40,14 +39,13 @@
             else{
                 $conn -> execute(" UPDATE users SET phone='$phone' WHERE id = $id ");
             }            
-            include('trans_data.php');
+            include('data.php');
 
         case "remark":
-            $id = $request -> id;
             $remark = $request -> remark;
             $remark = $conn -> addQ(trim($remark));
             $conn -> execute(" UPDATE users SET remark='$remark' WHERE id = $id ");
-            include('trans_data.php');
+            include('data.php');
     }
 
     $conn->close();
