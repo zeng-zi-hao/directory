@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Taipei');
 include('adodb/adodb.inc.php');
 
 $driver = 'mysqli';
@@ -11,8 +12,5 @@ $conn = adoNewConnection($driver);
 $conn->connect($server, $user, $password, $database);
 
 if(!$conn){
-    echo '連線失敗';
+    error_log(date("[Y-m-d G:i] ")."Error Message: 連接伺服器失敗".PHP_EOL, 3 , "C:\\xampp\\htdocs\\directory\\php\\log\\log");
 }
-// echo "<pre>";
-// echo '連線成功';
-// echo "</pre>";
