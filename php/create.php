@@ -31,17 +31,17 @@
     // 判斷create規則
     // 不能空值、姓名小於5、電話小於10、只能中英文和數字
     if($name_arr[0] == "" || $phone_arr[0] == ""){
-        error_log(date("[Y-m-d G:i] ")."Error Message: Create 姓名或電話為空值".PHP_EOL, 3 , "C:\\xampp\\htdocs\\directory\\php\\log\\log");
+        error_log(date("[Y-m-d G:i] ")."Error Message: Create 姓名或電話為空值".PHP_EOL, 3 , "\\xampp\\htdocs\\directory\\php\\log\\log");
     }
     else if(count($name_arr) > 5 || count($phone_arr) > 10){
-        error_log(date("[Y-m-d G:i] ")."Error Message: Create 姓名或電話超過規定長度".PHP_EOL, 3 , "C:\\xampp\\htdocs\\directory\\php\\log\\log");
+        error_log(date("[Y-m-d G:i] ")."Error Message: Create 姓名或電話超過規定長度".PHP_EOL, 3 , "\\xampp\\htdocs\\directory\\php\\log\\log");
     }
     else if(preg_match($name_isword,$name) == false || preg_match($phone_isnum,$phone)  == false){  
-        error_log(date("[Y-m-d G:i] ")."Error Message: Create 姓名或電話不能包含符號".PHP_EOL, 3 , "C:\\xampp\\htdocs\\directory\\php\\log\\log");
+        error_log(date("[Y-m-d G:i] ")."Error Message: Create 姓名或電話不能包含符號".PHP_EOL, 3 , "\\xampp\\htdocs\\directory\\php\\log\\log");
     }
     else{
         $conn -> execute(" INSERT INTO users VALUES('', '$name', '$phone', '$remark')");
-        error_log(date("[Y-m-d G:i] ")."Success Eessage: Create 成功".PHP_EOL, 3 , "C:\\xampp\\htdocs\\directory\\php\\log\\log");
+        error_log(date("[Y-m-d G:i] ")."Success Eessage: Create 成功".PHP_EOL, 3 , "\\xampp\\htdocs\\directory\\php\\log\\log");
     }    
            
     include('data.php');
