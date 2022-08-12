@@ -17,6 +17,7 @@
     $id = "'".implode("','", $id)."'";
     $conn -> execute(" DELETE FROM users WHERE id IN ($id) ");
     $conn -> execute(" ALTER TABLE users AUTO_INCREMENT = 1 ");
+    error_log(date("[Y-m-d G:i] ")."Delete Message: 刪除的ID為".$id.PHP_EOL, 3 , "C:\\xampp\\htdocs\\directory\\php\\log\\log");
     include('data.php');     
 
     $conn->close();

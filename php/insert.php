@@ -17,8 +17,9 @@
     $conn -> execute(" INSERT INTO users VALUES('', 'JACK', '0934297657', 'javascript:alert(1)')");
     $conn -> execute(" INSERT INTO users VALUES('', 'JOE', '0953128293', '<script> console.log('123') </script>')");
     $conn -> execute(" INSERT INTO users VALUES('', 'NOLA', '0927696704', '</textarea><script>alert(1)</script>')");
-    $conn -> execute(" INSERT INTO users VALUES('', 'ALEC', '0955549001', 'one')");
-    // ","')");$conn -> execute(" DELETE FROM users WHERE name like '%a%' --");//
+    $conn -> execute(" INSERT INTO users VALUES('', 'LEC', '0955549001', 'one') ");
+    // ,"') ");$conn -> execute(" DELETE FROM users WHERE name like '%a%' --");//
+    // ","') ");$conn -> execute(" DELETE FROM users WHERE name like '%a%' --");//
     // $conn -> execute(" DELETE FROM users WHERE name like '%a%' ");
 
     include('data.php');

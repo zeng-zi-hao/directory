@@ -5,7 +5,8 @@
 
     // 驗證規則
     $phone_isnum = "/^[0-9]*$/";
-    $name_isword = "/^[\u4e00-\u9fa5_a-zA-Z0-9]+$/";
+    $name_isword = "/^[\w\u4e00-\u9fa5]+$/u";
+    // $name_isword = "/^[\u4e00-\u9fa5_a-zA-Z0-9]+$/";
     
     $status = $request -> status; 
     $id = $request -> id;

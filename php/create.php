@@ -6,7 +6,8 @@
 
     // 驗證規則
     $phone_isnum = "/^[0-9]*$/";
-    $name_isword = "/^[\w\x\u4e00-\u9fa5_a-zA-Z0-9]+$/u";
+    $name_isword = "/^[\w\u4e00-\u9fa5]+$/u";
+    // $name_isword = "/^[\w\x\u4e00-\u9fa5_a-zA-Z0-9]+$/u";
     
     // 取得post資料
     $name = $request -> name;
@@ -17,9 +18,9 @@
     // 消除前後空白
     $name = $conn -> addQ(trim($name));
     $phone = $conn -> addQ(trim($phone));
-    $remark = $conn -> addQ(trim($remark));
+    $remark = $conn -> addQ(trim($remark));      
     // $name =  mysqli_real_escape_string($conn->_connectionID, trim($name));
-    // $phone =  mysqli_real_escape_string($conn->_connectonID, trim($phone));
+    // $phone =  mysqli_real_escape_string($conn->_connectionID, trim($phone));  
     // $remark =  mysqli_real_escape_string($conn->_connectionID, trim($remark));
 
     // 切割
