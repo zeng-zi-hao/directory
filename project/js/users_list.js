@@ -34,7 +34,7 @@ Vue.createApp({
         // 前端去json檔取得所有使用者資料
         getAllUserList(){
             axios
-                .get('data.php')  
+                .get('func/data.php')  
                     .then(response => {                    
                         this.users = response.data.result;
                         if(this.debug_status){
@@ -97,7 +97,7 @@ Vue.createApp({
         sendForm(){ 
             if(this.validate()){
                 axios           
-                    .post('create.php',{
+                    .post('func/create.php',{
                         name: this.Create_name,
                         phone: this.Create_phone,
                         remark: this.Create_remark,
@@ -152,7 +152,7 @@ Vue.createApp({
             }
             else{
                 axios
-                .post('editUser.php',{
+                .post('func/editUser.php',{
                     status: "name",
                     id: user.id,
                     name: event.target.value.trim(),
@@ -193,7 +193,7 @@ Vue.createApp({
             }
             else{
                 axios
-                .post('editUser.php',{
+                .post('func/editUser.php',{
                     status: "phone",
                     id: user.id,
                     phone: event.target.value.trim(),
@@ -216,7 +216,7 @@ Vue.createApp({
         },
         changeRemark(user,event){
             axios
-                .post('editUser.php',{
+                .post('func/editUser.php',{
                     status: "remark",
                     id: user.id,
                     remark: event.target.value.trim(),
@@ -241,7 +241,7 @@ Vue.createApp({
         // 刪除後清除搜索欄(query)
         deleteUser(id){
             axios                
-                .post('deleteUser.php',{id})
+                .post('func/deleteUser.php',{id})
                     .then(response => {                      
                         this.getAllUserList()
                         this.query = '';
@@ -274,7 +274,7 @@ Vue.createApp({
         // 將selectid用陣列的方式post
         multidelete(){ 
             axios
-                .post('deleteUser.php',{
+                .post('func/deleteUser.php',{
                     id: this.selectid,
                 })
                     .then(response => {
@@ -299,7 +299,7 @@ Vue.createApp({
             this.nodata = false;
             if(this.query != ''){
                 axios
-                    .post('query.php',{
+                    .post('func/query.php',{
                         query: this.query
                     })
                         .then(response => {

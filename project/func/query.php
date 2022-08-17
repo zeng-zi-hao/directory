@@ -9,7 +9,7 @@
 
     if($query != ""){
         $query = $conn -> execute("
-        SELECT * FROM users
+        SELECT * FROM directory
         WHERE name LIKE '%".$query."%' 
         OR phone LIKE '%".$query."%'
         OR remark LIKE '%".$query."%' 
@@ -30,7 +30,7 @@
     }
     else{
         $query = "
-        SELECT * FROM users
+        SELECT * FROM directory
         ORDER BY id desc
         ";
 

@@ -40,7 +40,7 @@
         error_log(date("[Y-m-d G:i] ")."Error Message: Create 姓名或電話不能包含符號".PHP_EOL, 3 , "\\xampp\\htdocs\\directory\\php\\log\\log");
     }
     else{
-        $conn -> execute(" INSERT INTO users VALUES('', '$name', '$phone', '$remark')");
+        $conn -> execute(" INSERT INTO directory VALUES('', '$name', '$phone', '$remark')");
         error_log(date("[Y-m-d G:i] ")."Success Eessage: Create 成功".PHP_EOL, 3 , "\\xampp\\htdocs\\directory\\php\\log\\log");
     }    
            

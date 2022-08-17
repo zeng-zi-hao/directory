@@ -27,7 +27,7 @@
                 error_log(date("[Y-m-d G:i] ")."Error Message: Edit= {". $id ."} 姓名不能包含符號".PHP_EOL, 3 , "\\xampp\\htdocs\\directory\\php\\log\\log");
             }
             else{
-                $conn -> execute(" UPDATE users SET name='$name' WHERE id = $id ");
+                $conn -> execute(" UPDATE directory SET name='$name' WHERE id = $id ");
                 error_log(date("[Y-m-d G:i] ")."Success Message: Edit= {". $id ."} 姓名成功".PHP_EOL, 3 , "\\xampp\\htdocs\\directory\\php\\log\\log");
             }            
             include('data.php');
@@ -48,7 +48,7 @@
                 error_log(date("[Y-m-d G:i] ")."Error Message: Edit= {". $id ."} 電話不能包含符號".PHP_EOL, 3 , "\\xampp\\htdocs\\directory\\php\\log\\log");
             }
             else{
-                $conn -> execute(" UPDATE users SET phone='$phone' WHERE id = $id ");
+                $conn -> execute(" UPDATE directory SET phone='$phone' WHERE id = $id ");
                 error_log(date("[Y-m-d G:i] ")."Success Message: Edit= {". $id ."} 電話成功".PHP_EOL, 3 , "\\xampp\\htdocs\\directory\\php\\log\\log");
             }            
             include('data.php');
@@ -58,7 +58,7 @@
             $remark = $request -> remark;
             $remark = $conn -> addQ(trim($remark));
             // $remark =  mysqli_real_escape_string($conn->_connectionID, trim($remark));
-            $conn -> execute(" UPDATE users SET remark='$remark' WHERE id = $id ");
+            $conn -> execute(" UPDATE directory SET remark='$remark' WHERE id = $id ");
             error_log(date("[Y-m-d G:i] ")."Success Message: Edit= {". $id ."} 備註成功".PHP_EOL, 3 , "\\xampp\\htdocs\\directory\\php\\log\\log");
             include('data.php');
             break;

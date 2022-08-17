@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+
+    <!-- Bootstrap5 & Vue & Axios CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+    <meta name=”viewport” content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/style.css"/>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+</head>
+<body>
+    
+    <div id="login">
+        <div class="Login_Layout">
+            <table border="0" class="Login_Table">
+
+                <tr>
+                    <td align="center" colspan="5" class="Login_Title"> 登入 </td>                    
+                </tr>
+
+                <tr>
+                    <td class="Login_Form"> 帳號 </td>
+                    <td> <input class="Login_Input" type="email" v-model.trim="account"> </td>
+                </tr>
+
+                <tr>
+                    <td class="Login_Form">
+                        密碼
+                    </td>
+
+                    <td>
+                        <input type="password" class="Login_Input" v-if="eye" v-model.trim="password" @keyup.caps-lock="bigchar"> 
+                        <input type="text" class="Login_Input" v-else v-model.trim="password" @keyup.caps-lock="bigchar">
+                    </td> 
+
+                    <td>
+                        <p  v-if="eye" @click="showpassword"> <img src="../img/eye-slash.svg" class="Login_Icon"> </p>
+                        <p  v-else @click="hidepassword"> <img src="../img/eye.svg" class="Login_Icon"> </p>
+                    </td>
+
+                    <td>       
+                        <p  v-if="is_bigchar"> <img src="../img/bigchar.svg" class="Login_Icon"> </p>                        
+                        <p  v-else style="width: 30px; height: 30px"> </p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align="end" colspan="2"> 
+                        <button class="Login_Btn" @click="send_UserForm"> 登入 </button> 
+                        <a href="register.html" class="Login_Btn"> 註冊 </a>
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+    </div>
+    
+    <script src="../js/login.js"></script>
+
+</body>
+</html>

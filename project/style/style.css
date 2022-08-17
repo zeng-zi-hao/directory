@@ -1,0 +1,88 @@
+.Login_Layout{
+    font-size: 25px;
+    margin-top: 13%;
+    margin-left: 39%;
+}
+
+.Login_Table{
+    width: 360px;    
+}
+
+.Login_Title{
+    font-size: 40px;    
+}
+
+.Login_Form{
+    font-size: 20px;
+    width: 90px;
+    height: 30px; 
+    text-align: justify;
+    text-justify: distribute-all-lines;
+    text-align-last: justify;
+}
+
+.Login_Input{
+    margin-left: 5px;
+}
+
+.Login_Btn{
+    margin-left: 15px;
+    font-size: 20px;
+}
+
+.Login_Icon{
+    width: 30px;
+    height: 30px;
+}
+
+/*-------------------------*/
+
+.Register_Layout{
+    font-size: 25px;
+    margin-top: 9%;
+    margin-left: 40%;
+}
+
+.Register_Message{
+    height: 50px;
+}
+.Register_Success_Message{
+    color:greenyellow;
+}
+.Register_Error_Message{
+    color:red;
+}
+
+.Register_Table{
+    width: 380px;
+}
+
+.Register_Title{
+    font-size: 40px;
+}
+
+.Register_Form{
+    font-size: 20px;
+    width: 90px;
+    height: 30px; 
+    text-align: justify;
+    text-justify: distribute-all-lines;
+    text-align-last: justify;
+}
+
+.Register_Input{
+    margin-left:30px;
+}
+
+.Register_Btn{
+    margin-top: 20px;
+    margin-right: 5px;
+    font-size: 20px;
+}
+
+.Register_Icon{
+    width: 30px;
+    height: 30px;
+}
+
+/*----------------------------------------------*/

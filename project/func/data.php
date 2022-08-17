@@ -2,7 +2,7 @@
     
     require_once('ado_conn.php');
 
-    $users_list = $conn -> execute(" SELECT id,name,phone,remark FROM users ORDER BY id desc ");    
+    $users_list = $conn -> execute(" SELECT id,name,phone,remark FROM directory ORDER BY id desc ");    
 
     $temp = array();
 

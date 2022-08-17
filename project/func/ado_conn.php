@@ -6,7 +6,7 @@ $driver = 'mysqli';
 $server = 'localhost';
 $user = 'root';
 $password = "";
-$database = 'directory';
+$database = 'project';
 
 $conn = adoNewConnection($driver); 
 $conn->connect($server, $user, $password, $database);
